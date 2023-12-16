@@ -20,3 +20,7 @@ def capacity_for_flux(flux, graph_matrix):
             destination += 1
         origin_index += 1
     return capacity
+
+
+def net_capacity_difference(capacity_matrix):
+    return np.sum(capacity_matrix, axis=0) - np.sum(capacity_matrix, axis=1)

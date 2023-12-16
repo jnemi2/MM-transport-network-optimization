@@ -18,4 +18,6 @@ flux_matrix = [
     [0, 0, 0, 50, 0]
 ]
 
-print(capacity_for_flux(flux_matrix, graph_matrix))
+capacity = capacity_for_flux(flux_matrix, graph_matrix)
+print(capacity)
+print(net_capacity_difference(capacity))
