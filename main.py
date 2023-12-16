@@ -21,3 +21,6 @@ flux_matrix = [
 capacity = capacity_for_flux(flux_matrix, graph_matrix)
 print(capacity)
 print(net_capacity_difference(capacity))
+balance_routes(capacity, graph_matrix)
+print(capacity)
+print(net_capacity_difference(capacity))
