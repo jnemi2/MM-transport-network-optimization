@@ -1,7 +1,8 @@
 import numpy as np
 from graph import *
+from transport import *
 
-matrix = [
+graph_matrix = [
     [0, 4, 2, float('inf'), float('inf')],
     [4, 0, 1, 3, 2],
     [2, 1, 0, float('inf'), float('inf')],
@@ -9,4 +10,12 @@ matrix = [
     [float('inf'), 2, float('inf'), 5, 0]
 ]
 
-print(find_path(0, 4, matrix))
+flux_matrix = [
+    [0, 0, 2, 0, 90],
+    [4, 0, 0, 0, 0],
+    [2, 0, 0, 0, 0],
+    [50, 3, 0, 0, 0],
+    [0, 0, 0, 50, 0]
+]
+
+print(capacity_for_flux(flux_matrix, graph_matrix))
