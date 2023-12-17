@@ -70,7 +70,7 @@ def cost_per_unused_capacity(capacity_matrix, flux_matrix, graph_matrix):
     return unused_capacity_cost
 
 
-def get_routes(capacity_matrix, graph_matrix):
+def get_routes(flux_matrix, capacity_matrix, graph_matrix):
     capacity = np.copy(capacity_matrix)
     matrix = np.copy(graph_matrix)
     for i in range(len(matrix)):
@@ -79,20 +79,20 @@ def get_routes(capacity_matrix, graph_matrix):
                 matrix[i][j] = float('inf')
     routes = []
     route_origin = 0
-    for o in range(len(capacity)):
-        node = capacity[route_origin]
-        adj_node_index = 0
+    for o in range(len(flux_matrix)):
+        node = flux_matrix[route_origin]
+        dest_node_index = 0
         for a in range(len(node)):
-            if node[adj_node_index] > 0:
-                return_path = graph.find_path(adj_node_index, route_origin, matrix)
-                return_path.insert(0, route_origin)
-                path_capacity = get_path_capacity(return_path, capacity)
+            if node[dest_node_index] > 0:
+                return_path = graph.find_path(route_origin, dest_node_index, matrix)
+                return_path.extend(graph.find_path(dest_node_index, route_origin, matrix)[1:])
+                path_capacity = min(get_path_capacity(return_path, capacity), node[dest_node_index])
                 increment_path_capacity(return_path, -path_capacity, capacity)
                 routes.append({'capacity': path_capacity, 'path': return_path})
                 # update graph
                 for n in range(len(return_path) - 1):
                     if capacity[return_path[n]][return_path[n+1]] == 0:
                         matrix[return_path[n]][return_path[n+1]] = float('inf')
-            adj_node_index += 1
+            dest_node_index += 1
         route_origin += 1
     return routes
