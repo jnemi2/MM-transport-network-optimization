@@ -24,6 +24,10 @@ print(net_capacity_difference(capacity))
 balance_routes(capacity, graph_matrix)
 print(capacity)
 routes = get_routes(capacity, graph_matrix)
-#print(get_path_capacity([1,4,1], capacity))
-for r in routes:
-    print(r)
+#for r in routes:
+#    print(r)
+
+print(get_unused_capacity(capacity, flux_matrix, graph_matrix))
+cost = cost_per_unused_capacity(capacity, flux_matrix, graph_matrix)
+print(cost)
+print(sum(sum(cost)))

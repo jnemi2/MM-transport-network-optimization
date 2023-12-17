@@ -53,6 +53,23 @@ def balance_routes(capacity_matrix, graph_matrix):
         max_deficit_node = np.where(balance == max_deficit)[0][0]
 
 
+def get_unused_capacity(capacity_matrix, flux_matrix, graph_matrix):
+    return capacity_matrix - capacity_for_flux(flux_matrix, graph_matrix)
+
+
+def cost_per_unused_capacity(capacity_matrix, flux_matrix, graph_matrix):
+    unused_capacity_cost = get_unused_capacity(capacity_matrix, flux_matrix, graph_matrix)
+    node_index = 0
+    for node in unused_capacity_cost:
+        unused_index = 0
+        for unused in node:
+            if unused > 0:
+                unused_capacity_cost[node_index][unused_index] *= graph_matrix[node_index][unused_index]
+            unused_index += 1
+        node_index += 1
+    return unused_capacity_cost
+
+
 def get_routes(capacity_matrix, graph_matrix):
     capacity = np.copy(capacity_matrix)
     matrix = np.copy(graph_matrix)
