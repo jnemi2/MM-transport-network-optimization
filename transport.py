@@ -59,13 +59,12 @@ def get_routes(capacity_matrix, graph_matrix):
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             if capacity[i][j] == 0:
-                matrix[i][j] == float('inf')
+                matrix[i][j] = float('inf')
     routes = []
     route_origin = 0
     for o in range(len(capacity)):
         node = capacity[route_origin]
         adj_node_index = 0
-        print(capacity)
         for a in range(len(node)):
             if node[adj_node_index] > 0:
                 return_path = graph.find_path(adj_node_index, route_origin, matrix)
