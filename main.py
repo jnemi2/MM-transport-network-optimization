@@ -31,3 +31,7 @@ print(get_unused_capacity(capacity, flux_matrix, graph_matrix))
 cost = cost_per_unused_capacity(capacity, flux_matrix, graph_matrix)
 print(cost)
 print(sum(sum(cost)))
+
+for r in routes:
+    print(r)
+    
