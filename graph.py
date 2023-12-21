@@ -54,12 +54,15 @@ def get_distances(origin, matrix):
     return distances
 
 
-def find_path(origin, destination, matrix):
-    distances, backtrack = explore(origin, matrix)
-
+def get_path(destination, backtrack):
     path = []
     temp_node = destination
     while temp_node is not None:
         path.insert(0, temp_node)
         temp_node = backtrack[temp_node]
     return path
+
+
+def find_path(origin, destination, matrix):
+    distances, backtrack = explore(origin, matrix)
+    return get_path(destination, backtrack)
