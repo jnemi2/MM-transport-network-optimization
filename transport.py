@@ -33,25 +33,6 @@ def capacity_for_flux(flux, graph_matrix):
 def net_capacity_difference(capacity_matrix):
     return np.sum(capacity_matrix, axis=0) - np.sum(capacity_matrix, axis=1)
 
-"""
-def balance_routes(capacity_matrix, graph_matrix):
-    balance = net_capacity_difference(capacity_matrix)
-    max_surplus = max(balance)
-    max_deficit = min(balance)
-    # max_surplus_node = balance.index(max_surplus)
-    max_surplus_node = np.where(balance == max_surplus)[0][0]
-    # max_deficit_node = balance.index(max_deficit)
-    max_deficit_node = np.where(balance == max_deficit)[0][0]
-    while balance[max_surplus_node] != 0:
-        return_path = graph.find_path(max_surplus_node, max_deficit_node, graph_matrix)
-        increment_path_capacity(return_path, min(max_surplus, -max_deficit), capacity_matrix)
-        # balance again
-        balance = net_capacity_difference(capacity_matrix)
-        max_surplus = max(balance)
-        max_deficit = min(balance)
-        max_surplus_node = np.where(balance == max_surplus)[0][0]
-        max_deficit_node = np.where(balance == max_deficit)[0][0]"""
-
 
 def balance_routes(capacity_matrix, graph_matrix):
     balance = net_capacity_difference(capacity_matrix)
