@@ -22,7 +22,7 @@ def find_min_index(numbers, indexes):
     return min_index
 
 
-def find_path(origin, destination, matrix):
+def explore(origin, matrix):
     distances = [float('inf')] * len(matrix)
     distances[origin] = 0
     backtrack = [None] * len(matrix)  # store the index of the node from which the distance was updated
@@ -45,10 +45,24 @@ def find_path(origin, destination, matrix):
             if distance_from_here < distances[adj_node]:
                 distances[adj_node] = distance_from_here
                 backtrack[adj_node] = current_node  # update shortest path to origin
+    
+    return distances, backtrack
 
+
+def get_distances(origin, matrix):
+    distances, backtrack = explore(origin, matrix)
+    return distances
+
+
+def get_path(destination, backtrack):
     path = []
     temp_node = destination
     while temp_node is not None:
         path.insert(0, temp_node)
         temp_node = backtrack[temp_node]
     return path
+
+
+def find_path(origin, destination, matrix):
+    distances, backtrack = explore(origin, matrix)
+    return get_path(destination, backtrack)

@@ -2,20 +2,45 @@ import numpy as np
 from graph import *
 from transport import *
 
+inf = float('inf')
+
 graph_matrix = [
-    [0, 4, 2, float('inf'), float('inf')],
-    [4, 0, 1, 3, 2],
-    [2, 1, 0, float('inf'), float('inf')],
-    [float('inf'), 3, float('inf'), 0, 5],
-    [float('inf'), 2, float('inf'), 5, 0]
+    [inf, 5, inf, inf, 6, 8, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf],
+    [5, inf, 5, inf, 8, 6, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf],
+    [inf, 5, inf, 5, inf, inf, 6, inf, inf, inf, inf, inf, inf, inf, inf, inf],
+    [inf, inf, 5, inf, inf, inf, inf, 6, inf, inf, inf, inf, inf, inf, inf, inf],
+    [6, 8, inf, inf, inf, 5, inf, inf, 6, inf, inf, inf, inf, inf, inf, inf],
+    [8, 6, inf, inf, 5, inf, 5, inf, inf, 6, inf, inf, inf, inf, inf, inf],
+    [inf, inf, 6, inf, inf, 5, inf, 5, inf, inf, 6, inf, inf, inf, inf, inf],
+    [inf, inf, inf, 6, inf, inf, 5, inf, inf, inf, inf, 6, inf, inf, inf, inf],
+    [inf, inf, inf, inf, 6, inf, inf, inf, inf, 5, inf, inf, 6, inf, inf, inf],
+    [inf, inf, inf, inf, inf, 6, inf, inf, 5, inf, 5, inf, inf, 6, inf, inf],
+    [inf, inf, inf, inf, inf, inf, 6, inf, inf, 5, inf, 5, inf, inf, 6, inf],
+    [inf, inf, inf, inf, inf, inf, inf, 6, inf, inf, 5, inf, inf, inf, inf, 6],
+    [inf, inf, inf, inf, inf, inf, inf, inf, 6, inf, inf, inf, inf, 5, inf, inf],
+    [inf, inf, inf, inf, inf, inf, inf, inf, inf, 6, inf, inf, 5, inf, 5, inf],
+    [inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, 6, inf, inf, 5, inf, 5],
+    [inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, 6, inf, inf, 5, inf]
 ]
 
+
 flux_matrix = [
-    [0, 0, 2, 0, 90],
-    [4, 0, 0, 0, 0],
-    [2, 0, 0, 0, 0],
-    [50, 3, 0, 0, 0],
-    [0, 0, 0, 50, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [10, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
 capacity = capacity_for_flux(flux_matrix, graph_matrix)
