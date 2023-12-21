@@ -37,20 +37,28 @@ def net_capacity_difference(capacity_matrix):
 def balance_routes(capacity_matrix, graph_matrix):
     balance = net_capacity_difference(capacity_matrix)
     max_surplus = max(balance)
-    max_deficit = min(balance)
     # max_surplus_node = balance.index(max_surplus)
     max_surplus_node = np.where(balance == max_surplus)[0][0]
-    # max_deficit_node = balance.index(max_deficit)
-    max_deficit_node = np.where(balance == max_deficit)[0][0]
+    
+    distances, backtrack = graph.explore(max_surplus_node, graph_matrix)
+    
+    balance_distance = [-b * d if b < 0 else float('inf') for b, d in zip(balance.tolist(), distances)]
+    
+    close_deficit_node = balance_distance.index(min(balance_distance))
+
+    close_deficit = balance[close_deficit_node]
+    
     while balance[max_surplus_node] != 0:
-        return_path = graph.find_path(max_surplus_node, max_deficit_node, graph_matrix)
-        increment_path_capacity(return_path, min(max_surplus, -max_deficit), capacity_matrix)
+        return_path = graph.find_path(max_surplus_node, close_deficit_node, graph_matrix)
+        increment_path_capacity(return_path, min(max_surplus, -close_deficit), capacity_matrix)
         # balance again
         balance = net_capacity_difference(capacity_matrix)
         max_surplus = max(balance)
-        max_deficit = min(balance)
         max_surplus_node = np.where(balance == max_surplus)[0][0]
-        max_deficit_node = np.where(balance == max_deficit)[0][0]
+        distances, backtrack = graph.explore(max_surplus_node, graph_matrix)
+        balance_distance = [-b * d if b < 0 else float('inf') for b, d in zip(balance.tolist(), distances)]
+        close_deficit_node = balance_distance.index(min(balance_distance))
+        close_deficit = balance[close_deficit_node]
 
 
 def get_unused_capacity(capacity_matrix, flux_matrix, graph_matrix):
