@@ -88,7 +88,8 @@ def get_routes(flux_matrix, capacity_matrix, graph_matrix):
                 return_path.extend(graph.find_path(dest_node_index, route_origin, matrix)[1:])
                 path_capacity = min(get_path_capacity(return_path, capacity), node[dest_node_index])
                 increment_path_capacity(return_path, -path_capacity, capacity)
-                routes.append({'capacity': path_capacity, 'path': return_path})
+                if len(return_path) > 1:
+                    routes.append({'capacity': path_capacity, 'path': return_path})
                 # update graph
                 for n in range(len(return_path) - 1):
                     if capacity[return_path[n]][return_path[n+1]] == 0:
